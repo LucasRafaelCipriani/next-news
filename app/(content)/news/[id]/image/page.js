@@ -4,15 +4,14 @@ import { notFound } from 'next/navigation';
 import { API_URL } from '@/constants';
 
 const ImagePage = async ({ params }) => {
-  // const { id: slug } = await params;
-  // const res = await fetch(`${API_URL}api/news/${slug}`);
+  const { id: slug } = await params;
+  const res = await fetch(`${API_URL}api/news/${slug}`);
 
-  // if (!res.ok) {
-  //   throw new Error('Failed to fetch news.');
-  // }
+  if (!res.ok) {
+    throw new Error('Failed to fetch news.');
+  }
 
-  // const newsItem = await res.json();
-  const newsItem = null;
+  const newsItem = await res.json();
 
   if (!newsItem) {
     notFound();

@@ -3,14 +3,13 @@ import { API_URL } from '@/constants';
 import { getLatestNews } from '@/lib/news';
 
 const NewsListingPage = async () => {
-  // const res = await fetch(`${API_URL}api/news`);
+  const res = await fetch(`${API_URL}api/news`);
 
-  // if (!res.ok) {
-  //   throw new Error('Failed to fetch news.');
-  // }
+  if (!res.ok) {
+    throw new Error('Failed to fetch news.');
+  }
 
-  // const allNews = await res.json();
-  const allNews = [];
+  const allNews = await res.json();
 
   const news = getLatestNews(allNews, 9);
 
