@@ -10,7 +10,7 @@ import {
 
 const FilteredNewsPage = async ({ params }) => {
   const filter = await params.filter;
-  const res = await fetch('http://localhost:3000/api/news');
+  const res = await fetch('https://next-news-gray-iota.vercel.app/api/news');
 
   if (!res.ok) {
     throw new Error('Failed to fetch news.');

@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation';
 
 const ImagePage = async ({ params }) => {
   const { id: slug } = await params;
-  const res = await fetch(`http://localhost:3000/api/news/${slug}`);
+  const res = await fetch(
+    `https://next-news-gray-iota.vercel.app/api/news/${slug}`
+  );
 
   if (!res.ok) {
     throw new Error('Failed to fetch news.');
