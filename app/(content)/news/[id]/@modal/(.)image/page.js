@@ -5,14 +5,15 @@ import ModalBackdrop from '@/components/ModalBackdrop';
 import { API_URL } from '@/constants';
 
 const InterceptedImagePage = async ({ params }) => {
-  const { id: slug } = await params;
-  const res = await fetch(`${API_URL}api/news/${slug}`);
+  // const { id: slug } = await params;
+  // const res = await fetch(`${API_URL}api/news/${slug}`);
 
-  if (!res.ok) {
-    // throw new Error('Failed to fetch news.');
-  }
+  // if (!res.ok) {
+  //   throw new Error('Failed to fetch news.');
+  // }
 
-  const newsItem = await res.json();
+  // const newsItem = await res.json();
+  const newsItem = null;
 
   if (!newsItem) {
     notFound();
