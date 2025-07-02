@@ -10,6 +10,39 @@ import {
 } from '@/lib/news';
 import { API_URL } from '@/constants';
 
+const FilterHeader = async ({ allNews, year, month }) => {
+  let links = getAvailableNewsYears(allNews);
+
+  if (year && !month) {
+    links = getAvailableNewsMonths(allNews, year);
+  }
+
+  if (year && month) {
+    links = [];
+  }
+
+  return (
+    <header id="archive-header">
+      <nav>
+        <ul>
+          {links.map((link) => {
+            const href =
+              year && !month
+                ? `/archive/${year}/${link.index}`
+                : `/archive/${link.index}`;
+
+            return (
+              <li key={link.index}>
+                <Link href={href}>{link.label}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </header>
+  );
+};
+
 const FilteredNews = ({ allNews, year, month }) => {
   let news;
 
@@ -37,18 +70,8 @@ const FilteredNewsPage = async ({ params }) => {
   }
 
   const allNews = await res.json();
-
-  let links = getAvailableNewsYears(allNews);
   const selectedYear = filter?.[0];
   const selectedMonth = filter?.[1];
-
-  if (selectedYear && !selectedMonth) {
-    links = getAvailableNewsMonths(allNews, selectedYear);
-  }
-
-  if (selectedYear && selectedMonth) {
-    links = [];
-  }
 
   if (
     (selectedYear &&
@@ -65,28 +88,23 @@ const FilteredNewsPage = async ({ params }) => {
 
   return (
     <>
-      <header id="archive-header">
-        <nav>
-          <ul>
-            {links.map((link) => {
-              const href =
-                selectedYear && !selectedMonth
-                  ? `/archive/${selectedYear}/${link.index}`
-                  : `/archive/${link.index}`;
-
-              return (
-                <li key={link.index}>
-                  <Link href={href}>{link.label}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </header>
       <Suspense
         fallback={
           <div id="loading">
-            <p>Loading...</p>
+            <p>Loading filter...</p>
+          </div>
+        }
+      >
+        <FilterHeader
+          year={selectedYear}
+          month={selectedMonth}
+          allNews={allNews}
+        />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div id="loading">
+            <p>Loading news...</p>
           </div>
         }
       >
