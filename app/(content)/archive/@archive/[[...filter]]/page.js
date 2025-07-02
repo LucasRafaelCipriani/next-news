@@ -14,7 +14,7 @@ const FilteredNewsPage = async ({ params }) => {
   const res = await fetch(`${API_URL}api/news`);
 
   if (!res.ok) {
-    throw new Error('Failed to fetch news.');
+    // throw new Error('Failed to fetch news.');
   }
 
   const allNews = await res.json();

@@ -9,7 +9,7 @@ const InterceptedImagePage = async ({ params }) => {
   const res = await fetch(`${API_URL}api/news/${slug}`);
 
   if (!res.ok) {
-    throw new Error('Failed to fetch news.');
+    // throw new Error('Failed to fetch news.');
   }
 
   const newsItem = await res.json();
