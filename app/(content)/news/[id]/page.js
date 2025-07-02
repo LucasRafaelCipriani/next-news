@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { Image, ImageKitProvider } from '@imagekit/next';
 
 import { API_URL } from '@/constants';
 
@@ -23,12 +23,15 @@ const NewsDetailsPage = async ({ params }) => {
       <header>
         <div className="img-container">
           <Link href={`/news/${newsItem.slug}/image`}>
-            <Image
-              src={`/images/news/${newsItem.image}`}
-              alt={newsItem.title}
-              width={500}
-              height={500}
-            />
+            <ImageKitProvider urlEndpoint={process.env.IMAGEKIT_URL_ENDPOINT}>
+              <Image
+                src={`/images/${newsItem.image}`}
+                alt={newsItem.title}
+                width={500}
+                height={500}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
+            </ImageKitProvider>
           </Link>
         </div>
         <h1>{newsItem.title}</h1>
