@@ -199,7 +199,8 @@ ul {
   border-bottom: 2px solid #b0b0a6;
 }
 
-.error {
+#error,
+#loading {
   text-align: center;
   margin-top: 3rem;
 }
