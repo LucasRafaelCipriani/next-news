@@ -1,8 +1,9 @@
 import NewsList from '@/components/NewsList';
+import { API_URL } from '@/constants';
 import { getLatestNews } from '@/lib/news';
 
 const NewsListingPage = async () => {
-  const res = await fetch('https://next-news-gray-iota.vercel.app/api/news');
+  const res = await fetch(`${API_URL}api/news`);
 
   if (!res.ok) {
     throw new Error('Failed to fetch news.');
